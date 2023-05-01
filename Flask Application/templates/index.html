@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Car Price Predictor</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="static/css/style.css">
+    </head>
+    <body class="bg-dark" id="body">
+        <div>
+            <header>
+                <h1 class="heading">Welcome to Car Price Predictor</h1>
+                <p class="sec-heading">Predict car prices here</p>
+            </header>
+        </div>
+        <div>
+            <form  class="form" method="post" accept-charset="utf-8" >
+                <div>
+                    <label for="company">Select Company:</label>
+                    <select name="company" id="company" required="1" class="inpt">
+                        {% for c in company %}
+                        <option value="{{c}}">{{c}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div>
+                    <label for="car_model">Select Model:</label>
+                    <select name="car_model" id="car_model" required="1" class="inpt">
+                        {% for model in car_model %}
+                        <option value="{{model}}">{{model}}</option>
+                        {% endfor %}
+                        
+                    </select>
+                </div>
+
+                <div>
+                    <label for="label">Select Label:</label>
+                    <select name="label" id="label" required="1" class="inpt">
+                        {% for l in label %}
+                        <option value="{{l}}">{{l}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div>
+                    <label for="location">Select location:</label>
+                    <select name="location" id="location" required="1" class="inpt">
+                        {% for l in location %}
+                        <option value="{{l}}">{{l}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <label for="fuel_type">Select Fuel Type:</label>
+                    <select name="fuel_type" id="fuel_type" required="1" class="inpt">
+                        {% for l in fuel_type %}
+                        <option value="{{l}}">{{l}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <label for="owner">Select Owner:</label>
+                    <select name="owner" id="owner" required="1" class="inpt">
+                        {% for l in owner %}
+                        <option value="{{l}}">{{l}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <label for="year">Select Year:</label>
+                    <select name="year" id="year" required="1" class="inpt">
+                        {% for l in year %}
+                        <option value="{{l}}">{{l}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <label for="kms_driven">Enter number of kilometers driven:</label>
+                    <input class="inpt" type="text" id="kms_driven" name="kms_driven" placeholder="Enter no. of kilometers travelled" required>
+                </div>
+                <div>
+                    <button class="submit-button" onclick="send_data()">Predict Price</button>
+                </div>
+            </form>
+            <br>
+            <div>
+                <h3 class="result"><span id="prediction"></span></h3>
+            </div>
+        </div>
+        <div>
+            <footer>
+            </footer>
+        </div>
+        <script>
+            function form_handler(event){
+                event.preventDefault();
+            }
+            function send_data(){
+                document.querySelector('form').addEventListener('submit',form_handler);
+                var fd= new FormData(document.querySelector('form'));
+
+                var xhr=new XMLHttpRequest();
+
+                xhr.open('POST','/predict',true);
+                document.getElementById("prediction").innerHTML ="Wait! Predicting Price...";
+
+                xhr.onreadystatechange=function()
+                {
+                    if(xhr.readyState==XMLHttpRequest.DONE)
+                    {
+                        document.getElementById("prediction").innerHTML="Prediction: ₹"+xhr.responseText;
+                    }
+                }
+                xhr.onload=function(){};
+                xhr.send(fd);
+            }
+        </script>
+    
+    </body>
+</html>
