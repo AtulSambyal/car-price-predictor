@@ -1,0 +1,28 @@
+li{
+    display: inline;
+}
+ul{
+    background-color: #08277e;
+    margin:0;
+    padding: 0;
+    list-style-type: none;
+    overflow: hidden;
+}
+li {
+   float: left;
+}
+li a {
+  font-family: Circular,-apple-system,BlinkMacSystemFont,"Segoe UI",roboto,oxygen-sans,ubuntu,cantarell,"Helvetica Neue",sans-serif;
+  font-size: 21px;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+li a:hover {
+  background-color: #3077cd;
+}
+.btn :active {
+  background-color: #386da6;
+}

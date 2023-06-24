@@ -1,3 +1,4 @@
+{% include "header.html" %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -33,15 +34,6 @@
                         <option value="{{model}}">{{model}}</option>
                         {% endfor %}
                         
-                    </select>
-                </div>
-
-                <div>
-                    <label for="label">Select Label:</label>
-                    <select name="label" id="label" required="1" class="inpt">
-                        {% for l in label %}
-                        <option value="{{l}}">{{l}}</option>
-                        {% endfor %}
                     </select>
                 </div>
 
